@@ -4,6 +4,11 @@ import UIKit
 public final class MapNoteSymbolView: UIView {
     public static let defaultSize = CGSize(width: 22, height: 22)
 
+    /// Set for a fixed-size glyph inside a sticker; nil keeps proportional scaling.
+    public var fixedGlyphInset: CGFloat? {
+        didSet { setNeedsLayout() }
+    }
+
     private let backingView = UIImageView()
     private let symbolView = UIImageView()
 
@@ -30,8 +35,8 @@ public final class MapNoteSymbolView: UIView {
         super.layoutSubviews()
         backingView.frame = bounds
         symbolView.frame = bounds.insetBy(
-            dx: bounds.width * 3 / Self.defaultSize.width,
-            dy: bounds.height * 3 / Self.defaultSize.height
+            dx: fixedGlyphInset ?? bounds.width * 3 / Self.defaultSize.width,
+            dy: fixedGlyphInset ?? bounds.height * 3 / Self.defaultSize.height
         )
     }
 
