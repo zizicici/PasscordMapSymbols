@@ -28,6 +28,8 @@ public enum MapNoteSymbol: String, CaseIterable {
     case houseboat
     case directionsWalk = "directions_walk"
     case transitTicket = "transit_ticket"
+    case busMapPin = "bus_map_pin"
+    case restArea = "rest_area"
 
     // outdoors
     case hiking
@@ -37,7 +39,6 @@ public enum MapNoteSymbol: String, CaseIterable {
     case park
     case forest
     case landscape
-    case sunny
     case water
     case downhillSkiing = "downhill_skiing"
     case kayaking
@@ -55,14 +56,26 @@ public enum MapNoteSymbol: String, CaseIterable {
     case iceSkating = "ice_skating"
     case nordicWalking = "nordic_walking"
     case skateboarding
-    case cloud
-    case rainy
-    case weatherSnowy = "weather_snowy"
-    case nightlight
     case waterDrop = "water_drop"
     case hotTub = "hot_tub"
     case rollerSkating = "roller_skating"
     case sledding
+    case playground
+    case outdoorGrill = "outdoor_grill"
+
+    // weather
+    case sunny
+    case partlyCloudyDay = "partly_cloudy_day"
+    case cloud
+    case rainy
+    case thunderstorm
+    case weatherSnowy = "weather_snowy"
+    case weatherHail = "weather_hail"
+    case foggy
+    case air
+    case wbTwilight = "wb_twilight"
+    case nightlight
+    case partlyCloudyNight = "partly_cloudy_night"
 
     // foodAndDrink
     case restaurant
@@ -147,6 +160,7 @@ public enum MapNoteSymbol: String, CaseIterable {
     case synagogue
     case localMall = "local_mall"
     case localGasStation = "local_gas_station"
+    case parcelPickup = "parcel_pickup"
     case localPharmacy = "local_pharmacy"
     case localPostOffice = "local_post_office"
     case localPolice = "local_police"
@@ -164,6 +178,16 @@ public enum MapNoteSymbol: String, CaseIterable {
     case accountBalance = "account_balance"
     case localSee = "local_see"
     case localConvenienceStore = "local_convenience_store"
+
+    // dailyServices
+    case evStation = "ev_station"
+    case wc
+    case babyChangingStation = "baby_changing_station"
+    case carRepair = "car_repair"
+    case dentistry
+    case medicalServices = "medical_services"
+    case recycling
+    case petSupplies = "pet_supplies"
 
     // personal
     case star
@@ -195,7 +219,11 @@ public enum MapNoteSymbol: String, CaseIterable {
     case diamond
 
     private var materialSymbolName: String {
-        self == .birdwatching ? "raven" : rawValue
+        switch self {
+        case .birdwatching: "raven"
+        case .parcelPickup: "package_2"
+        default: rawValue
+        }
     }
 
     public var assetName: String {
@@ -225,9 +253,11 @@ public enum MapNoteSymbol: String, CaseIterable {
 public enum MapNoteSymbolCategory: CaseIterable {
     case travel
     case outdoors
+    case weather
     case foodAndDrink
     case activities
     case places
+    case dailyServices
     case personal
 
     public var symbols: [MapNoteSymbol] {
@@ -239,19 +269,25 @@ public enum MapNoteSymbolCategory: CaseIterable {
                 .map, .sailing, .directionsBus, .subway,
                 .airplaneTicket, .passport, .airportShuttle, .localTaxi,
                 .tram, .cableCar, .motorcycle, .electricScooter,
-                .carRental, .houseboat, .directionsWalk, .transitTicket
+                .carRental, .houseboat, .directionsWalk, .transitTicket,
+                .busMapPin, .restArea
             ]
         case .outdoors:
             return [
                 .hiking, .beachAccess, .camping, .birdwatching,
-                .park, .forest, .landscape, .sunny,
+                .park, .forest, .landscape,
                 .water, .downhillSkiing, .kayaking, .surfing,
                 .eco, .grass, .pottedPlant, .spa,
                 .pool, .scubaDiving, .kitesurfing, .paragliding,
                 .rowing, .snowboarding, .iceSkating, .nordicWalking,
-                .skateboarding, .cloud, .rainy, .weatherSnowy,
-                .nightlight, .waterDrop, .hotTub, .rollerSkating,
-                .sledding
+                .skateboarding, .waterDrop, .hotTub, .rollerSkating,
+                .sledding, .playground, .outdoorGrill
+            ]
+        case .weather:
+            return [
+                .sunny, .partlyCloudyDay, .cloud, .rainy,
+                .thunderstorm, .weatherSnowy, .weatherHail, .foggy,
+                .air, .wbTwilight, .nightlight, .partlyCloudyNight
             ]
         case .foodAndDrink:
             return [
@@ -268,7 +304,7 @@ public enum MapNoteSymbolCategory: CaseIterable {
                 .photoCamera, .museum, .musicNote, .sportsSoccer,
                 .palette, .shoppingBag, .theaterComedy, .movie,
                 .sportsBasketball, .fitnessCenter, .localFlorist, .libraryBooks,
-                .theaters, .piano, .headphones, .mic,
+                .piano, .headphones, .mic,
                 .sportsTennis, .sportsVolleyball, .sportsBaseball, .badminton,
                 .architecture, .science, .menuBook, .localActivity,
                 .casino, .attractions, .festival, .nightlife,
@@ -281,18 +317,25 @@ public enum MapNoteSymbolCategory: CaseIterable {
                 .apartment, .storefront, .localHospital, .localLibrary,
                 .stadium, .church, .templeBuddhist, .mosque,
                 .castle, .fort, .templeHindu, .synagogue,
-                .localMall, .localGasStation, .localPharmacy, .localPostOffice,
-                .localPolice, .localFireDepartment, .localParking, .localLaundryService,
-                .localAtm, .localCarWash, .warehouse, .factory,
+                .localMall, .localPolice, .localFireDepartment,
+                .warehouse, .factory,
                 .cottage, .cabin, .villa, .locationCity,
-                .accountBalance, .localSee, .localConvenienceStore
+                .accountBalance, .localSee
+            ]
+        case .dailyServices:
+            return [
+                .localGasStation, .evStation, .parcelPickup, .localPharmacy,
+                .localPostOffice, .localParking, .localLaundryService, .localAtm,
+                .wc, .familyRestroom, .babyChangingStation, .childCare,
+                .carRepair, .localCarWash, .dentistry, .medicalServices,
+                .recycling, .petSupplies, .localConvenienceStore
             ]
         case .personal:
             return [
                 .star, .favorite, .flag, .pets,
                 .celebration, .cake, .emojiEvents, .bookmark,
                 .sentimentSatisfied, .lightbulb, .redeem, .groups,
-                .sentimentDissatisfied, .familyRestroom, .childCare, .elderly,
+                .sentimentDissatisfied, .elderly,
                 .person, .volunteerActivism, .thumbUp, .handshake,
                 .workspacePremium, .verified, .checkCircle, .warning,
                 .selfImprovement, .starShine, .diamond

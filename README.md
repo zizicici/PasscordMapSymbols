@@ -1,8 +1,9 @@
 # PasscordMapSymbols
 
-An iOS Swift Package framework for Passcord map note symbols. It contains 179
-Material Symbols Rounded icons and matching white sticker backgrounds. Both
-layers are vector PDF assets, so a sticker stays sharp when its view is resized.
+An iOS Swift Package framework for Passcord map note symbols. It contains 199
+Material Symbols Rounded icons (198 visible in the picker) and matching white
+sticker backgrounds. Both layers are vector PDF assets, so a sticker stays
+sharp when its view is resized.
 
 ```swift
 import PasscordMapSymbols
