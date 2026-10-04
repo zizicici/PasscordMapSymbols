@@ -115,6 +115,17 @@ public enum MapNoteSymbol: String, CaseIterable {
     case movie
     case sportsBasketball = "sports_basketball"
     case fitnessCenter = "fitness_center"
+    case directionsRun = "directions_run"
+    case stairs2 = "stairs_2"
+    case sportsGymnastics = "sports_gymnastics"
+    case pickleball
+    case sportsMma = "sports_mma"
+    case sportsCricket = "sports_cricket"
+    case sportsHandball = "sports_handball"
+    case sportsHockey = "sports_hockey"
+    case sportsFootball = "sports_football"
+    case sportsRugby = "sports_rugby"
+    case accessibleForward = "accessible_forward"
     case localFlorist = "local_florist"
     case libraryBooks = "library_books"
     case theaters
@@ -218,6 +229,155 @@ public enum MapNoteSymbol: String, CaseIterable {
     case starShine = "star_shine"
     case diamond
 
+    // Additional travel symbols
+    case flightTakeoff = "flight_takeoff"
+    case flightLand = "flight_land"
+    case electricBike = "electric_bike"
+    case electricCar = "electric_car"
+    case electricMoped = "electric_moped"
+    case electricRickshaw = "electric_rickshaw"
+    case gondolaLift = "gondola_lift"
+    case funicular
+    case monorail
+    case helicopter
+    case scooter
+    case snowmobile
+    case rvHookup = "rv_hookup"
+    case anchor
+    case signpost
+    case autoTowing = "auto_towing"
+    case bikeDock = "bike_dock"
+
+    // Additional outdoors symbols
+    case mountainFlag = "mountain_flag"
+    case volcano
+    case onsen
+    case sauna
+    case planet
+    case deck
+    case snowshoeing
+    case outdoorGarden = "outdoor_garden"
+    case agriculture
+    case owl
+    case snail
+    case crueltyFree = "cruelty_free"
+    case emojiNature = "emoji_nature"
+    case compost
+    case hive
+    case pergola
+    case bathOutdoor = "bath_outdoor"
+
+    // Additional weather symbols
+    case rainyLight = "rainy_light"
+    case rainyHeavy = "rainy_heavy"
+    case rainySnow = "rainy_snow"
+    case snowingHeavy = "snowing_heavy"
+    case moonStars = "moon_stars"
+    case tornado
+    case cyclone
+    case flood
+
+    // Additional foodAndDrink symbols
+    case emojiFoodBeverage = "emoji_food_beverage"
+    case kebabDining = "kebab_dining"
+    case setMeal = "set_meal"
+    case cookie
+    case skillet
+    case japaneseCurry = "japanese_curry"
+    case okonomiyaki
+    case washoku
+    case yoshoku
+    case hanamiDango = "hanami_dango"
+    case soba
+    case udon
+    case yakitori
+    case coffeeMaker = "coffee_maker"
+    case waterBottle = "water_bottle"
+    case chefHat = "chef_hat"
+    case wheat
+    case avocadoBean = "avocado_bean"
+
+    // Additional activities symbols
+    case chess
+    case playingCards = "playing_cards"
+    case toysAndGames = "toys_and_games"
+    case computer
+    case historyEdu = "history_edu"
+    case sportsMotorsports = "sports_motorsports"
+    case padel
+    case target
+    case sportsKabaddi = "sports_kabaddi"
+    case swords
+    case crossword
+    case manga
+    case radio
+    case movieFilter = "movie_filter"
+    case camera
+    case drone
+    case headMountedDevice = "head_mounted_device"
+
+    // Additional places symbols
+    case chalet
+    case bungalow
+    case holidayVillage = "holiday_village"
+    case nightShelter = "night_shelter"
+    case newsstand
+    case foodBank = "food_bank"
+    case labs
+    case construction
+
+    // Additional dailyServices symbols
+    case contentCut = "content_cut"
+    case healthAndBeauty = "health_and_beauty"
+    case fragrance
+    case eyeglasses
+    case shoppingCart = "shopping_cart"
+    case checkroom
+    case chair
+    case handyman
+    case localShipping = "local_shipping"
+    case stethoscope
+    case vaccines
+    case pill
+    case physicalTherapy = "physical_therapy"
+    case massage
+    case stroller
+    case acupuncture
+    case psychology
+    case radiology
+    case bloodtype
+    case cleaningServices = "cleaning_services"
+    case dryCleaning = "dry_cleaning"
+    case plumbing
+    case electricalServices = "electrical_services"
+    case print
+    case currencyExchange = "currency_exchange"
+    case key
+    case shower
+    case bed
+    case roomService = "room_service"
+    case concierge
+    case pestControl = "pest_control"
+
+    // Additional personal symbols
+    case familyGroup = "family_group"
+    case personHeart = "person_heart"
+    case partnerHeart = "partner_heart"
+    case heartSmile = "heart_smile"
+    case heartBroken = "heart_broken"
+    case sentimentExcited = "sentiment_excited"
+    case sentimentCalm = "sentiment_calm"
+    case sentimentStressed = "sentiment_stressed"
+    case sentimentWorried = "sentiment_worried"
+    case sick
+    case foldedHands = "folded_hands"
+    case candle
+    case jewelry
+    case crown
+    case savings
+    case wallet
+    case backpack
+
     private var materialSymbolName: String {
         switch self {
         case .birdwatching: "raven"
@@ -250,95 +410,171 @@ public enum MapNoteSymbol: String, CaseIterable {
     }
 }
 
+/// Browsing groups only. Persist a symbol's raw value, never its section or index.
+/// Each selectable symbol belongs to exactly one group.
 public enum MapNoteSymbolCategory: CaseIterable {
     case travel
-    case outdoors
-    case weather
+    case lodging
     case foodAndDrink
+    case drinksAndDesserts
+    case sports
+    case outdoorActivities
+    case outdoors
+    case artsAndCulture
     case activities
-    case places
+    case workAndStudy
     case dailyServices
+    case homeAndFamily
+    case healthAndWellness
+    case places
     case personal
+    case markers
+    case weather
 
     public var symbols: [MapNoteSymbol] {
         switch self {
         case .travel:
             return [
-                .flight, .train, .directionsCar, .directionsBoat,
-                .hotel, .luggage, .directionsBike, .explore,
-                .map, .sailing, .directionsBus, .subway,
-                .airplaneTicket, .passport, .airportShuttle, .localTaxi,
-                .tram, .cableCar, .motorcycle, .electricScooter,
-                .carRental, .houseboat, .directionsWalk, .transitTicket,
-                .busMapPin, .restArea
+                .directionsWalk, .directionsBike, .electricBike, .scooter,
+                .electricScooter, .directionsCar, .electricCar, .localTaxi,
+                .motorcycle, .electricMoped, .electricRickshaw, .directionsBus,
+                .airportShuttle, .busMapPin, .subway, .train,
+                .tram, .monorail, .cableCar, .gondolaLift,
+                .funicular, .flight, .flightTakeoff, .flightLand,
+                .helicopter, .directionsBoat, .sailing, .houseboat,
+                .carRental, .transitTicket, .bikeDock, .anchor
             ]
-        case .outdoors:
+        case .lodging:
             return [
-                .hiking, .beachAccess, .camping, .birdwatching,
-                .park, .forest, .landscape,
-                .water, .downhillSkiing, .kayaking, .surfing,
-                .eco, .grass, .pottedPlant, .spa,
-                .pool, .scubaDiving, .kitesurfing, .paragliding,
-                .rowing, .snowboarding, .iceSkating, .nordicWalking,
-                .skateboarding, .waterDrop, .hotTub, .rollerSkating,
-                .sledding, .playground, .outdoorGrill
-            ]
-        case .weather:
-            return [
-                .sunny, .partlyCloudyDay, .cloud, .rainy,
-                .thunderstorm, .weatherSnowy, .weatherHail, .foggy,
-                .air, .wbTwilight, .nightlight, .partlyCloudyNight
+                .map, .explore, .signpost, .passport,
+                .airplaneTicket, .luggage, .backpack, .hotel,
+                .roomService, .concierge, .restArea, .camping,
+                .rvHookup, .cottage, .cabin, .villa,
+                .chalet, .bungalow, .holidayVillage, .nightShelter
             ]
         case .foodAndDrink:
             return [
-                .restaurant, .localCafe, .localBar, .bakeryDining,
-                .localPizza, .icecream, .ramenDining, .lunchDining,
-                .wineBar, .localDrink, .fastfood, .dinnerDining,
-                .breakfastDining, .brunchDining, .riceBowl, .soupKitchen,
-                .takeoutDining, .grocery, .liquor, .beerMeal,
-                .bento, .tapas, .shavedIce, .egg,
-                .nutrition
+                .restaurant, .fastfood, .lunchDining, .dinnerDining,
+                .breakfastDining, .brunchDining, .localPizza, .ramenDining,
+                .riceBowl, .soupKitchen, .takeoutDining, .bento,
+                .tapas, .kebabDining, .setMeal, .japaneseCurry,
+                .okonomiyaki, .washoku, .yoshoku, .soba,
+                .udon, .yakitori, .skillet, .chefHat,
+                .egg, .nutrition, .wheat, .avocadoBean,
+                .outdoorGrill
+            ]
+        case .drinksAndDesserts:
+            return [
+                .localCafe, .emojiFoodBeverage, .coffeeMaker, .localDrink,
+                .waterBottle, .localBar, .wineBar, .liquor,
+                .beerMeal, .bakeryDining, .cake, .cookie,
+                .icecream, .shavedIce, .hanamiDango
+            ]
+        case .sports:
+            return [
+                .fitnessCenter, .directionsRun, .stairs2, .sportsGymnastics,
+                .sportsSoccer, .sportsBasketball, .sportsTennis, .sportsVolleyball,
+                .sportsBaseball, .badminton, .pickleball, .padel,
+                .sportsCricket, .sportsHandball, .sportsHockey, .sportsFootball,
+                .sportsRugby, .sportsMma, .sportsMartialArts, .sportsKabaddi,
+                .swords
+            ]
+        case .outdoorActivities:
+            return [
+                .hiking, .nordicWalking, .snowshoeing, .mountainFlag,
+                .downhillSkiing, .snowboarding, .sledding, .snowmobile,
+                .iceSkating, .rollerSkating, .skateboarding, .pool,
+                .kayaking, .rowing, .surfing, .scubaDiving,
+                .kitesurfing, .paragliding, .golfCourse, .sportsMotorsports,
+                .target
+            ]
+        case .outdoors:
+            return [
+                .beachAccess, .park, .forest, .landscape,
+                .water, .volcano, .planet, .waterDrop,
+                .eco, .grass, .pottedPlant, .outdoorGarden,
+                .agriculture, .birdwatching, .owl, .snail,
+                .crueltyFree, .emojiNature, .hive, .pets,
+                .compost, .pergola
+            ]
+        case .artsAndCulture:
+            return [
+                .museum, .theaterComedy, .musicNote, .piano,
+                .headphones, .mic, .radio, .movie,
+                .movieFilter, .photoCamera, .camera, .videocam,
+                .drone, .palette, .brush, .draw,
+                .manga
             ]
         case .activities:
             return [
-                .photoCamera, .museum, .musicNote, .sportsSoccer,
-                .palette, .shoppingBag, .theaterComedy, .movie,
-                .sportsBasketball, .fitnessCenter, .localFlorist, .libraryBooks,
-                .piano, .headphones, .mic,
-                .sportsTennis, .sportsVolleyball, .sportsBaseball, .badminton,
-                .architecture, .science, .menuBook, .localActivity,
-                .casino, .attractions, .festival, .nightlife,
-                .videocam, .brush, .draw, .sportsEsports,
-                .toys, .sportsMartialArts, .golfCourse
+                .localActivity, .attractions, .festival, .nightlife,
+                .casino, .sportsEsports, .headMountedDevice, .chess,
+                .playingCards, .toysAndGames, .crossword, .toys,
+                .playground, .deck
             ]
-        case .places:
+        case .workAndStudy:
             return [
-                .home, .school, .work, .event,
-                .apartment, .storefront, .localHospital, .localLibrary,
-                .stadium, .church, .templeBuddhist, .mosque,
-                .castle, .fort, .templeHindu, .synagogue,
-                .localMall, .localPolice, .localFireDepartment,
-                .warehouse, .factory,
-                .cottage, .cabin, .villa, .locationCity,
-                .accountBalance, .localSee
+                .school, .work, .event, .computer,
+                .libraryBooks, .menuBook, .localLibrary, .historyEdu,
+                .architecture, .science, .labs, .lightbulb,
+                .print
             ]
         case .dailyServices:
             return [
-                .localGasStation, .evStation, .parcelPickup, .localPharmacy,
-                .localPostOffice, .localParking, .localLaundryService, .localAtm,
-                .wc, .familyRestroom, .babyChangingStation, .childCare,
-                .carRepair, .localCarWash, .dentistry, .medicalServices,
-                .recycling, .petSupplies, .localConvenienceStore
+                .shoppingBag, .shoppingCart, .grocery, .storefront,
+                .localMall, .localConvenienceStore, .newsstand, .localFlorist,
+                .checkroom, .fragrance, .jewelry, .redeem,
+                .wallet, .savings, .localAtm, .currencyExchange,
+                .parcelPickup, .localPostOffice, .localShipping, .localGasStation,
+                .evStation, .localParking, .carRepair, .localCarWash,
+                .autoTowing, .localLaundryService, .dryCleaning, .cleaningServices,
+                .handyman, .plumbing, .electricalServices, .pestControl,
+                .recycling, .petSupplies
+            ]
+        case .homeAndFamily:
+            return [
+                .home, .chair, .key, .bed,
+                .shower, .familyGroup, .childCare, .stroller,
+                .babyChangingStation, .familyRestroom, .wc
+            ]
+        case .healthAndWellness:
+            return [
+                .localHospital, .medicalServices, .stethoscope, .dentistry,
+                .localPharmacy, .pill, .vaccines, .radiology,
+                .bloodtype, .physicalTherapy, .accessibleForward, .acupuncture,
+                .psychology, .selfImprovement, .massage, .spa,
+                .onsen, .bathOutdoor, .sauna, .hotTub,
+                .contentCut, .healthAndBeauty, .eyeglasses
+            ]
+        case .places:
+            return [
+                .apartment, .locationCity, .castle, .fort,
+                .localSee, .church, .templeBuddhist, .templeHindu,
+                .mosque, .synagogue, .stadium, .accountBalance,
+                .localPolice, .localFireDepartment, .warehouse, .factory,
+                .construction, .foodBank
             ]
         case .personal:
             return [
-                .star, .favorite, .flag, .pets,
-                .celebration, .cake, .emojiEvents, .bookmark,
-                .sentimentSatisfied, .lightbulb, .redeem, .groups,
-                .sentimentDissatisfied, .elderly,
-                .person, .volunteerActivism, .thumbUp, .handshake,
-                .workspacePremium, .verified, .checkCircle, .warning,
-                .selfImprovement, .starShine, .diamond
+                .person, .groups, .partnerHeart, .personHeart,
+                .elderly, .volunteerActivism, .handshake, .thumbUp,
+                .celebration, .sentimentSatisfied, .heartSmile, .sentimentExcited,
+                .sentimentCalm, .sentimentDissatisfied, .heartBroken, .sentimentStressed,
+                .sentimentWorried, .sick, .foldedHands, .candle
+            ]
+        case .markers:
+            return [
+                .star, .starShine, .favorite, .flag,
+                .bookmark, .checkCircle, .verified, .warning,
+                .emojiEvents, .workspacePremium, .diamond, .crown
+            ]
+        case .weather:
+            return [
+                .sunny, .partlyCloudyDay, .cloud, .rainyLight,
+                .rainy, .rainyHeavy, .thunderstorm, .rainySnow,
+                .weatherSnowy, .snowingHeavy, .weatherHail, .foggy,
+                .air, .wbTwilight, .nightlight, .partlyCloudyNight,
+                .moonStars, .tornado, .cyclone, .flood
             ]
         }
     }
