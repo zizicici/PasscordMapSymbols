@@ -182,7 +182,6 @@ License: Apache License 2.0 (see MaterialSymbols-LICENSE.txt).
 - castle: https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/castle/materialsymbolsrounded/castle_fill1_20px.svg
 - fort: https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/fort/materialsymbolsrounded/fort_fill1_20px.svg
 - temple_hindu: https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/temple_hindu/materialsymbolsrounded/temple_hindu_fill1_20px.svg
-- synagogue: https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/synagogue/materialsymbolsrounded/synagogue_fill1_20px.svg
 - local_mall: https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/local_mall/materialsymbolsrounded/local_mall_fill1_20px.svg
 - local_police: https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/local_police/materialsymbolsrounded/local_police_fill1_20px.svg
 - local_fire_department: https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/local_fire_department/materialsymbolsrounded/local_fire_department_fill1_20px.svg

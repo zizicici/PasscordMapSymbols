@@ -168,7 +168,6 @@ public enum MapNoteSymbol: String, CaseIterable {
     case castle
     case fort
     case templeHindu = "temple_hindu"
-    case synagogue
     case localMall = "local_mall"
     case localGasStation = "local_gas_station"
     case parcelPickup = "parcel_pickup"
@@ -550,7 +549,7 @@ public enum MapNoteSymbolCategory: CaseIterable {
             return [
                 .apartment, .locationCity, .castle, .fort,
                 .localSee, .church, .templeBuddhist, .templeHindu,
-                .mosque, .synagogue, .stadium, .accountBalance,
+                .mosque, .stadium, .accountBalance,
                 .localPolice, .localFireDepartment, .warehouse, .factory,
                 .construction, .foodBank
             ]
