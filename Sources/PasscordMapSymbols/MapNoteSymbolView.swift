@@ -17,6 +17,14 @@ public final class MapNoteSymbolView: UIView {
     private var maskSize: CGSize = .zero
     private var maskScale: CGFloat = 0
     private var maskNeedsUpdate = true
+    private var configuredSymbol: MapNoteSymbol?
+    // Reused by calendar cells, map annotations, and their transition copies.
+    private static let maskCache: NSCache<NSString, UIImage> = {
+        let cache = NSCache<NSString, UIImage>()
+        cache.countLimit = 256
+        cache.totalCostLimit = 4 * 1024 * 1024
+        return cache
+    }()
 
     public init(symbol: MapNoteSymbol, color: UIColor) {
         super.init(frame: CGRect(origin: .zero, size: Self.defaultSize))
@@ -53,11 +61,13 @@ public final class MapNoteSymbolView: UIView {
     }
 
     public func configure(symbol: MapNoteSymbol, color: UIColor) {
+        symbolView.tintColor = color
+        guard configuredSymbol != symbol else { return }
+        configuredSymbol = symbol
         backingImage = symbol.stickerBackgroundImage
         maskNeedsUpdate = true
         updateBackingAppearance()
         symbolView.image = symbol.image
-        symbolView.tintColor = color
     }
 
     /// Recolor the glyph without rebuilding the sticker's HDR backing.
@@ -95,11 +105,19 @@ public final class MapNoteSymbolView: UIView {
               bounds.width > 0, bounds.height > 0 else { return }
         let scale = max(window?.screen.scale ?? traitCollection.displayScale, 3)
         guard maskNeedsUpdate || maskSize != bounds.size || maskScale != scale else { return }
-        let format = UIGraphicsImageRendererFormat()
-        format.opaque = false
-        format.scale = scale
-        let image = UIGraphicsImageRenderer(size: bounds.size, format: format).image { _ in
-            backingImage.draw(in: CGRect(origin: .zero, size: bounds.size))
+        let key = "\(configuredSymbol?.rawValue ?? ""):\(bounds.width):\(bounds.height):\(scale)" as NSString
+        let image: UIImage
+        if let cached = Self.maskCache.object(forKey: key) {
+            image = cached
+        } else {
+            let format = UIGraphicsImageRendererFormat()
+            format.opaque = false
+            format.scale = scale
+            image = UIGraphicsImageRenderer(size: bounds.size, format: format).image { _ in
+                backingImage.draw(in: CGRect(origin: .zero, size: bounds.size))
+            }
+            let cost = image.cgImage.map { $0.bytesPerRow * $0.height } ?? 0
+            Self.maskCache.setObject(image, forKey: key, cost: cost)
         }
         hdrMaskLayer.contents = image.cgImage
         hdrMaskLayer.contentsScale = scale
